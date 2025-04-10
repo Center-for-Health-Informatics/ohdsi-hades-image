@@ -11,7 +11,8 @@ docker build --tag achilles:v1.7.2 --tag achilles:latest .
 ## Running a container
 
 ```shell
-docker run -it achilles:latest
+docker run -it --rm --name achilles -e TZ=America/New_York
+achilles:latest
 ```
 ## Running Achilles
 
@@ -19,8 +20,9 @@ The analyses are run in one SQL session and all intermediate results are written
 
 See the [DatabaseConnector](https://github.com/OHDSI/DatabaseConnector) package for details on settings the connection details for your database:
 
+The image preloads `library(Achilles)` from its .Rprofile.
+
 ```r
-library(Achilles)
 connectionDetails <- createConnectionDetails(
   dbms="redshift",
   server="server.com",
@@ -51,6 +53,12 @@ The SQL platforms supported by [DatabaseConnector](https://github.com/OHDSI/Data
 * snowflake
 * bigquery
 * iris
+
+### running with pre-loaded jdbc drivers
+```sh
+docker run -it --rm --name achilles -e TZ=America/New_York -v /Users/…/OHDSI/achilles/jdbcDrivers:/home/ohdsi/jdbcDrivers -e DATABASECONNECTOR_JAR_FOLDER=/home/ohdsi/jdbcDrivers achilles
+```
+
 
 ## References
 
