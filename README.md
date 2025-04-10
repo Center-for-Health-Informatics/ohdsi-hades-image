@@ -41,6 +41,16 @@ The cdmDatabaseSchema parameter, and resultsDatabaseSchema parameter, are the fu
 
 The SQL platforms supported by [DatabaseConnector](https://github.com/OHDSI/DatabaseConnector) and [SqlRender](https://github.com/OHDSI/SqlRender) are the **only** ones supported here in Achilles as `dbms`.
 
+### valid dbms names include:
+
+* postgresql
+* redshift
+* sql server
+* oracle
+* spark
+* snowflake
+* bigquery
+* iris
 
 ## References
 
