@@ -3,7 +3,7 @@ if object_id('@cdm_schema.FINAL_VISIT_IDS', 'U') is not null drop table @cdm_sch
 
 SELECT encounter_id, VISIT_OCCURRENCE_ID_NEW
 INTO @cdm_schema.FINAL_VISIT_IDS
-  FROM (
+FROM (
     SELECT *,
         ROW_NUMBER() OVER (PARTITION BY encounter_id ORDER BY PRIORITY) AS RN
     FROM (
@@ -27,4 +27,4 @@ INTO @cdm_schema.FINAL_VISIT_IDS
         FROM @cdm_schema.ASSIGN_ALL_VISIT_IDS
     ) T1
   ) RankedVisits
-  WHERE RN = 1
+WHERE RN = 1

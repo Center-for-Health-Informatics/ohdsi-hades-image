@@ -1,9 +1,16 @@
-with mapped_states as (
-    select distinct l.location_id, l.city, states_map.state, l.zip
-    from @cdm_schema.location l
-    left join @cdm_schema.states_map states_map on l.state = states_map.state_abbreviation
+with
+    mapped_states
+    as
+    (
+        select distinct l.location_id, l.city, states_map.state, l.zip
+        from @cdm_schema.location l
+            left join @cdm_schema.states_map  states_map
+     on l.state = states_map.state_abbreviation
 )
-insert into @cdm_schema.person (
+insert into @cdm_schema
+
+.person
+(
     person_id,
     gender_concept_id,
     year_of_birth,
@@ -55,5 +62,5 @@ select
     p.ethnicity,
     0
 from @synthea_schema.patients p
-left join mapped_states l on p.city = l.city and p.state = l.state and p.zip = l.zip
+    left join mapped_states l on p.city = l.city and p.state = l.state and p.zip = l.zip
 where p.gender is not null;
