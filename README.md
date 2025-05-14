@@ -21,12 +21,13 @@ This runs an R REPL with the Hades tools and some database drivers pre-loaded.
 See the [DatabaseConnector](https://github.com/OHDSI/DatabaseConnector) package for details on settings the connection details for your database. The drivers for `sql server`, `postgresql` and `sqlite` have been pre-loaded in this image.
 
 ```r
-connectionDetails <- createConnectionDetails(
-  dbms="redshift",
-  server="server.com",
-  user="secret",
-  password='secret',
-  port="5439")
+cd <- DatabaseConnector::createConnectionDetails(
+  dbms          = "sql server",
+  server        = "server;Database=db",
+  user          = "user",
+  password      = "password",
+  extraSettings = "encrypt=true;trustServerCertificate=true;"
+)
 ```
 
 ## Using Achilles
@@ -38,7 +39,7 @@ The image preloads `library(Achilles)` from its .Rprofile file.
 ```r
 Achilles::achilles(
     cdmVersion = "5.4",
-    connectionDetails = connectionDetails,
+    connectionDetails = cd,
     cdmDatabaseSchema = "yourCdmSchema",
     resultsDatabaseSchema = "yourResultsSchema"
 )
