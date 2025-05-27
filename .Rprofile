@@ -1,7 +1,4 @@
-if (requireNamespace("Achilles", quietly = TRUE)) {
-  library(Achilles)
-}
-if (requireNamespace("DataQualityDashboard", quietly = TRUE)) {
-  library(DataQualityDashboard)
+if (requireNamespace("DatabaseConnector", quietly = TRUE)) {
+  library(DatabaseConnector)
 }
 options(save.workspace = "no", ask = FALSE)
